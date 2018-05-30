@@ -30,6 +30,8 @@ module Kafka
     end
 
     def fetch_from_partition(topic, partition, offset: :latest, max_bytes: 1048576)
+      @logger.debug "Fetching batch from #{topic}/#{partition} starting at offset #{offset}"
+
       if offset == :earliest
         offset = -2
       elsif offset == :latest
